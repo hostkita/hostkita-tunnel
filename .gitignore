@@ -1,0 +1,16 @@
+# Environment — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# Runtime logs
+*.log
+/var/
+
+# OS & editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

@@ -1,0 +1,54 @@
+version: "3.9"
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  Hostkita — Development docker-compose
+#  Usage:
+#    docker compose -f docker/docker-compose.dev.yml up --build
+# ══════════════════════════════════════════════════════════════════════════════
+
+services:
+  hostkita-dev:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        BORE_VERSION: "0.6.0"
+        TZ: "Asia/Jakarta"
+    container_name: hostkita-dev
+    hostname: hostkita-dev
+    restart: "no"
+
+    environment:
+      - ROOT_PASS=DevPassword123!
+      - NTFY_TOPIC=hostkita-dev
+      - PORTS=22,8080
+      - BORE_SERVER=bore.pub
+      - PORT=8080
+      - LOG_LEVEL=DEBUG
+      - TZ=Asia/Jakarta
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      # Live-mount scripts for rapid iteration (read-only in container)
+      - ../scripts:/usr/local/bin-dev:ro
+      # Dev log volume for easy inspection
+      - hostkita-dev-logs:/var/log/supervisor
+
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+
+volumes:
+  hostkita-dev-logs:
+    name: hostkita-dev-logs
