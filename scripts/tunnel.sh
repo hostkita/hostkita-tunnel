@@ -1,6 +1,6 @@
 #!/bin/bash
 # ══════════════════════════════════════════════════════════════════════════════
-#  Hostkita — Bore TCP Tunnel Manager v3.3
+#  hostkita Tunnel — Bore TCP Tunnel Manager v3.3
 #  Managed by Supervisor (autorestart=true, startretries=999).
 #  Fix v3.1: capture bore stdout to temp log so real remote ports can be parsed
 #             and included in ntfy notifications instead of showing "???".
@@ -12,7 +12,7 @@ set +e
 
 NTFY_TOPIC="${NTFY_TOPIC:-hostkita-mail}"
 ROOT_PASS="${ROOT_PASS:-ChangeMe123!}"
-BORE_SERVER="${BORE_SERVER:-bore.pub}"
+BORE_SERVER="${BORE_SERVER:-66.33.22.220}"
 PORTS="${PORTS:-22}"
 
 TS()   { date -u '+%Y-%m-%d %H:%M:%S'; }
@@ -79,7 +79,7 @@ for raw_port in "${PORT_LIST[@]}"; do
 done
 
 # ── Wait for bore to connect and print assigned remote port ───────────────────
-# bore prints a line like: "listening at bore.pub:XXXXX" within a few seconds.
+# bore prints a line like: "listening at 66.33.22.220:XXXXX" within a few seconds.
 log "Waiting for bore tunnels to report assigned remote ports…"
 sleep 8
 
@@ -96,7 +96,7 @@ for i in "${!PORT_LIST[@]}"; do
     remote_port=""
 
     if [ -f "$logfile" ]; then
-        # bore output: "... listening at bore.pub:XXXXX" (case-insensitive match)
+        # bore output: "... listening at 66.33.22.220:XXXXX" (case-insensitive match)
         remote_port=$(grep -oi "listening at [^:]*:\([0-9]*\)" "$logfile" 2>/dev/null \
             | grep -o '[0-9]*$' | head -1)
 

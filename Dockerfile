@@ -5,16 +5,16 @@ ARG BORE_VERSION=0.6.0
 ARG TZ=Asia/Jakarta
 
 # ── Labels ─────────────────────────────────────────────────────────────────────
-LABEL maintainer="Hostkita" \
+LABEL maintainer="hostkita Tunnel" \
       version="3.0.0" \
-      description="Hostkita — Production-ready bore.pub TCP Tunnel on Ubuntu 24.04 with Supervisor"
+      description="hostkita Tunnel — Production-ready 66.33.22.220 TCP Tunnel on Ubuntu 24.04 with Supervisor"
 
 # ── Environment ────────────────────────────────────────────────────────────────
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=${TZ} \
     ROOT_PASS=ChangeMe123! \
     NTFY_TOPIC=hostkita-mail \
-    BORE_SERVER=bore.pub \
+    BORE_SERVER=66.33.22.220 \
     PORTS=22 \
     PORT=8080 \
     LOG_LEVEL=INFO \
@@ -86,7 +86,7 @@ RUN wget -q "https://github.com/ekzhang/bore/releases/download/v${BORE_VERSION}/
 RUN mkdir -p \
         /run/sshd \
         /var/log/supervisor \
-        /var/log/hostkita \
+        /var/log/hostkita-tunnel \
         /etc/supervisor/conf.d \
         /etc/logrotate.d \
         /app
@@ -107,7 +107,7 @@ RUN ssh-keygen -A \
     && printf '\nBanner /etc/ssh/hostkita_banner\nPrintMotd yes\n' >> /etc/ssh/sshd_config
 
 # ── Layer 5: MOTD ───────────────────────────────────────────────────────────────
-RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           G H O S T   T U N N E L           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  bore.pub           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
+RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           G H O S T   T U N N E L           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  66.33.22.220           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
 
 # ── Layer 6: Copy project files ─────────────────────────────────────────────────
 WORKDIR /app
@@ -115,7 +115,7 @@ WORKDIR /app
 COPY config/sshd_banner.txt     /etc/ssh/hostkita_banner
 COPY config/supervisord.conf    /etc/supervisor/supervisord.conf
 COPY config/conf.d/             /etc/supervisor/conf.d/
-COPY config/logrotate/hostkita /etc/logrotate.d/hostkita
+COPY config/logrotate/hostkita-tunnel /etc/logrotate.d/hostkita-tunnel
 COPY scripts/startup.sh         /usr/local/bin/startup.sh
 COPY scripts/tunnel.sh          /usr/local/bin/tunnel.sh
 COPY scripts/watchdog.sh        /usr/local/bin/watchdog.sh

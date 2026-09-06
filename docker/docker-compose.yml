@@ -1,30 +1,30 @@
 version: "3.9"
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  Hostkita — Production docker-compose
+#  hostkita Tunnel — Production docker-compose
 #  Usage:
 #    cp ../.env.example ../.env   # lalu edit ROOT_PASS & NTFY_TOPIC
 #    docker compose -f docker/docker-compose.yml up -d
 # ══════════════════════════════════════════════════════════════════════════════
 
 services:
-  hostkita:
-    image: hostkita:latest
+  hostkita-tunnel:
+    image: hostkita-tunnel:latest
     build:
       context: ..
       dockerfile: Dockerfile
       args:
         BORE_VERSION: "0.6.0"
         TZ: "${TZ:-Asia/Jakarta}"
-    container_name: hostkita
-    hostname: hostkita
+    container_name: hostkita-tunnel
+    hostname: hostkita-tunnel
     restart: unless-stopped
 
     environment:
       - ROOT_PASS=${ROOT_PASS:-ChangeMe123!}
       - NTFY_TOPIC=${NTFY_TOPIC:-hostkita-mail}
       - PORTS=${PORTS:-22}
-      - BORE_SERVER=${BORE_SERVER:-bore.pub}
+      - BORE_SERVER=${BORE_SERVER:-66.33.22.220}
       - PORT=${PORT:-8080}
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       - TZ=${TZ:-Asia/Jakarta}
@@ -35,7 +35,7 @@ services:
     volumes:
       # Persist Supervisor and service logs across container restarts
       - hostkita-logs:/var/log/supervisor
-      - hostkita-logs:/var/log/hostkita
+      - hostkita-tunnel-logs:/var/log/hostkita-tunnel
       # Persist SSH host keys so clients don't see key-changed warnings on restart
       - hostkita-ssh-keys:/etc/ssh
 
@@ -54,8 +54,8 @@ services:
 
 volumes:
   hostkita-logs:
-    name: hostkita-supervisor-logs
-  hostkita-logs:
-    name: hostkita-service-logs
+    name: hostkita-tunnel-supervisor-logs
+  hostkita-tunnel-logs:
+    name: hostkita-tunnel-service-logs
   hostkita-ssh-keys:
-    name: hostkita-ssh-keys
+    name: hostkita-tunnel-ssh-keys

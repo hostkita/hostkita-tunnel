@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Hostkita — Health Check HTTP Server v3.0
+hostkita Tunnel — Health Check HTTP Server v3.0
 Listens on $PORT (default 8080).
 Endpoints:
   GET /health  → JSON status (200 OK)
@@ -61,13 +61,13 @@ class HealthHandler(http.server.BaseHTTPRequestHandler):
             self._serve_404()
 
     def _serve_root(self):
-        body = b"Hostkita OK\n"
+        body = b"hostkita Tunnel OK\n"
         self._respond(200, "text/plain", body)
 
     def _serve_health(self):
         payload = {
             "status": "ok",
-            "service": "Hostkita",
+            "service": "hostkita Tunnel",
             "version": "3.0.0",
             "uptime_seconds": int(time.time() - START_TIME),
         }
@@ -77,13 +77,13 @@ class HealthHandler(http.server.BaseHTTPRequestHandler):
         uptime = int(time.time() - START_TIME)
         payload = {
             "status": "ok",
-            "service": "Hostkita",
+            "service": "hostkita Tunnel",
             "version": "3.0.0",
             "uptime_seconds": uptime,
             "bore_tunnels": _count_procs("bore"),
             "sshd_procs": _count_procs("sshd"),
             "ports": os.environ.get("PORTS", "22"),
-            "bore_server": os.environ.get("BORE_SERVER", "bore.pub"),
+            "bore_server": os.environ.get("BORE_SERVER", "66.33.22.220"),
             "supervisor": _supervisor_status(),
         }
         self._respond(200, "application/json", json.dumps(payload, indent=2).encode())
@@ -105,5 +105,5 @@ class HealthHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     server = http.server.HTTPServer(("0.0.0.0", PORT), HealthHandler)
-    print(f"[Hostkita] Health server listening on :{PORT}", flush=True)
+    print(f"[hostkita Tunnel] Health server listening on :{PORT}", flush=True)
     server.serve_forever()

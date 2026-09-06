@@ -1,28 +1,28 @@
 version: "3.9"
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  Hostkita — Development docker-compose
+#  hostkita Tunnel — Development docker-compose
 #  Usage:
 #    docker compose -f docker/docker-compose.dev.yml up --build
 # ══════════════════════════════════════════════════════════════════════════════
 
 services:
-  hostkita-dev:
+  hostkita-tunnel-dev:
     build:
       context: ..
       dockerfile: Dockerfile
       args:
         BORE_VERSION: "0.6.0"
         TZ: "Asia/Jakarta"
-    container_name: hostkita-dev
-    hostname: hostkita-dev
+    container_name: hostkita-tunnel-dev
+    hostname: hostkita-tunnel-dev
     restart: "no"
 
     environment:
       - ROOT_PASS=DevPassword123!
-      - NTFY_TOPIC=hostkita-dev
+      - NTFY_TOPIC=hostkita-tunnel-dev
       - PORTS=22,8080
-      - BORE_SERVER=bore.pub
+      - BORE_SERVER=66.33.22.220
       - PORT=8080
       - LOG_LEVEL=DEBUG
       - TZ=Asia/Jakarta
@@ -51,4 +51,4 @@ services:
 
 volumes:
   hostkita-dev-logs:
-    name: hostkita-dev-logs
+    name: hostkita-tunnel-dev-logs

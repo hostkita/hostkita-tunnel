@@ -1,6 +1,6 @@
 #!/bin/bash
 # ══════════════════════════════════════════════════════════════════════════════
-#  Hostkita — ntfy Notification Helper v3.2
+#  hostkita Tunnel — ntfy Notification Helper v3.2
 #  Usage: notify.sh "Title" "Body" [priority] [tags]
 #
 #  v3.2 fix: --retry 5 --retry-delay 3 --retry-all-errors + direct -d body
@@ -9,7 +9,7 @@
 set -e
 
 NTFY_TOPIC="${NTFY_TOPIC:-hostkita-mail}"
-TITLE="${1:-Hostkita}"
+TITLE="${1:-hostkita Tunnel}"
 BODY="${2:-Notification}"
 PRIORITY="${3:-default}"
 TAGS="${4:-white_check_mark}"

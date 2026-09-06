@@ -1,6 +1,6 @@
 #!/bin/bash
 # ══════════════════════════════════════════════════════════════════════════════
-#  Hostkita — Watchdog v3.3
+#  hostkita Tunnel — Watchdog v3.3
 #  Optional additional watchdog; Supervisor already handles auto-restart.
 #  Can be enabled by adding watchdog.conf to /etc/supervisor/conf.d/.
 #
@@ -12,7 +12,7 @@ set +e
 
 NTFY_TOPIC="${NTFY_TOPIC:-hostkita-mail}"
 ROOT_PASS="${ROOT_PASS:-ChangeMe123!}"
-BORE_SERVER="${BORE_SERVER:-bore.pub}"
+BORE_SERVER="${BORE_SERVER:-66.33.22.220}"
 PORTS="${PORTS:-22}"
 WATCH_INTERVAL="${WATCH_INTERVAL:-60}"
 
