@@ -15,7 +15,7 @@
 | `ROOT_PASS` | SSH root password | `Kosay378%` |
 | `NTFY_TOPIC` | ntfy.sh notification topic | `temp-mail1` |
 | `PORTS` | Comma-separated ports to tunnel | `22,80,3000` |
-| `BORE_SERVER` | Bore server address | `66.33.22.220` |
+| `BORE_SERVER` | Bore server address | `bore.pub` |
 
 ### Optional
 
@@ -35,7 +35,7 @@ docker run -d \
   -e ROOT_PASS="Kosay378%" \
   -e NTFY_TOPIC="temp-mail1" \
   -e PORTS="22,80" \
-  -e BORE_SERVER="66.33.22.220" \
+  -e BORE_SERVER="bore.pub" \
   -p 8080:8080 \
   hostkita-tunnel
 ```
@@ -59,7 +59,7 @@ docker compose -f docker/docker-compose.yml up -d
 After deployment, check ntfy.sh on your configured topic:
 
 ```
-ssh root@66.33.22.220 -p PORT_FROM_NTFY
+ssh root@bore.pub -p PORT_FROM_NTFY
 ```
 
 Password: value of `ROOT_PASS`

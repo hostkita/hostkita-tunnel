@@ -22,7 +22,7 @@ services:
       - ROOT_PASS=DevPassword123!
       - NTFY_TOPIC=hostkita-tunnel-dev
       - PORTS=22,8080
-      - BORE_SERVER=66.33.22.220
+      - BORE_SERVER=bore.pub
       - PORT=8080
       - LOG_LEVEL=DEBUG
       - TZ=Asia/Jakarta

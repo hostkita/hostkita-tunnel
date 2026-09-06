@@ -2,7 +2,7 @@
   ╔══════════════════════════════════════════════╗
   ║                 H O S T K I T A              ║
   ║     Production · Supervisor · Ubuntu 24.04   ║
-  ║          Ubuntu 24.04  ·  66.33.22.220       ║
+  ║          Ubuntu 24.04  ·  bore.pub       ║
   ╚══════════════════════════════════════════════╝
 
   ⚠  Authorized access only. All sessions logged.

@@ -7,14 +7,14 @@ ARG TZ=Asia/Jakarta
 # ── Labels ─────────────────────────────────────────────────────────────────────
 LABEL maintainer="hostkita Tunnel" \
       version="3.0.0" \
-      description="hostkita Tunnel — Production-ready 66.33.22.220 TCP Tunnel on Ubuntu 24.04 with Supervisor"
+      description="hostkita Tunnel — Production-ready bore.pub TCP Tunnel on Ubuntu 24.04 with Supervisor"
 
 # ── Environment ────────────────────────────────────────────────────────────────
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=${TZ} \
     ROOT_PASS=ChangeMe123! \
     NTFY_TOPIC=hostkita-mail \
-    BORE_SERVER=66.33.22.220 \
+    BORE_SERVER=bore.pub \
     PORTS=22 \
     PORT=8080 \
     LOG_LEVEL=INFO \
@@ -107,7 +107,7 @@ RUN ssh-keygen -A \
     && printf '\nBanner /etc/ssh/hostkita_banner\nPrintMotd yes\n' >> /etc/ssh/sshd_config
 
 # ── Layer 5: MOTD ───────────────────────────────────────────────────────────────
-RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           H O S T K I T A           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  66.33.22.220           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
+RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           H O S T K I T A           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  bore.pub           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
 
 # ── Layer 6: Copy project files ─────────────────────────────────────────────────
 WORKDIR /app

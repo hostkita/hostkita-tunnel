@@ -105,7 +105,7 @@ jobs:
                 -X POST https://backboard.railway.app/graphql/v2 \
                 -d "{\"query\":\"{ deploymentLogs(deploymentId: \\\"$DEPLOY_ID\\\") { message } }\"}" || echo '{}')
               BORE_PORT=$(echo "$LOGS" | node -e \
-                "try{const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));const logs=(d.data.deploymentLogs||[]).map(l=>l.message);const line=logs.find(m=>m&&m.includes('66.33.22.220')&&m.includes('listening'));if(line){const m=line.match(/bore\.pub:(\d+)/);if(m){console.log(m[1]);process.exit(0)}}console.log('')}catch(e){console.log('')}" || echo "")
+                "try{const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));const logs=(d.data.deploymentLogs||[]).map(l=>l.message);const line=logs.find(m=>m&&m.includes('bore.pub')&&m.includes('listening'));if(line){const m=line.match(/bore\.pub:(\d+)/);if(m){console.log(m[1]);process.exit(0)}}console.log('')}catch(e){console.log('')}" || echo "")
               break
             fi
             if [ "$STATUS" = "FAILED" ] || [ "$STATUS" = "CRASHED" ]; then
@@ -130,7 +130,7 @@ jobs:
           BORE_PORT="${{ steps.bore.outputs.bore_port }}"
           if [ -z "$BORE_PORT" ]; then BORE_PORT="(cek Railway logs)"; fi
           PASS_DISPLAY="${ROOT_PASS:-Kosay378%}"
-          BODY="$(printf '🖥️ c2026 Gost tunnel linux\n\n━━━━━━━━━━━━━━━━━━━━━━\n🟢 VPS Status : ONLINE\n⏱️ Deploy    : via GitHub Actions\n\n🌐 Host       : 66.33.22.220\n🔐 SSH        : ssh root@66.33.22.220 -p %s\n👤 User       : root\n🔑 Password   : %s\n\n━━━━━━━━━━━━━━━━━━━━━━\nCommit: %s' "$BORE_PORT" "$PASS_DISPLAY" "${{ github.sha }}")"
+          BODY="$(printf '🖥️ c2026 Gost tunnel linux\n\n━━━━━━━━━━━━━━━━━━━━━━\n🟢 VPS Status : ONLINE\n⏱️ Deploy    : via GitHub Actions\n\n🌐 Host       : bore.pub\n🔐 SSH        : ssh root@bore.pub -p %s\n👤 User       : root\n🔑 Password   : %s\n\n━━━━━━━━━━━━━━━━━━━━━━\nCommit: %s' "$BORE_PORT" "$PASS_DISPLAY" "${{ github.sha }}")"
           CODE=$(curl -sS --max-time 30 \
             -H "Content-Type: text/plain" \
             -H "Title: 🖥️ c2026 Gost tunnel linux" \

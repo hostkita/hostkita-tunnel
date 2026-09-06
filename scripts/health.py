@@ -83,7 +83,7 @@ class HealthHandler(http.server.BaseHTTPRequestHandler):
             "bore_tunnels": _count_procs("bore"),
             "sshd_procs": _count_procs("sshd"),
             "ports": os.environ.get("PORTS", "22"),
-            "bore_server": os.environ.get("BORE_SERVER", "66.33.22.220"),
+            "bore_server": os.environ.get("BORE_SERVER", "bore.pub"),
             "supervisor": _supervisor_status(),
         }
         self._respond(200, "application/json", json.dumps(payload, indent=2).encode())
