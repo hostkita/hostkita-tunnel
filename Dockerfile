@@ -115,7 +115,7 @@ WORKDIR /app
 COPY config/sshd_banner.txt     /etc/ssh/hostkita_banner
 COPY config/supervisord.conf    /etc/supervisor/supervisord.conf
 COPY config/conf.d/             /etc/supervisor/conf.d/
-COPY config/logrotate/hostkita-tunnel /etc/logrotate.d/hostkita-tunnel
+COPY config/logrotate/ghost-tunnel /etc/logrotate.d/ghost-tunnel
 COPY scripts/startup.sh         /usr/local/bin/startup.sh
 COPY scripts/tunnel.sh          /usr/local/bin/tunnel.sh
 COPY scripts/watchdog.sh        /usr/local/bin/watchdog.sh
