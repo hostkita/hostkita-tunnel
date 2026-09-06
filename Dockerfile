@@ -107,7 +107,7 @@ RUN ssh-keygen -A \
     && printf '\nBanner /etc/ssh/hostkita_banner\nPrintMotd yes\n' >> /etc/ssh/sshd_config
 
 # ── Layer 5: MOTD ───────────────────────────────────────────────────────────────
-RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           G H O S T   T U N N E L           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  66.33.22.220           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
+RUN printf '\n  ╔══════════════════════════════════════════════╗\n  ║           H O S T K I T A           ║\n  ║     Production · Supervisor · Ubuntu 24.04   ║\n  ║          Ubuntu 24.04  ·  66.33.22.220           ║\n  ╚══════════════════════════════════════════════╝\n\n' > /etc/motd
 
 # ── Layer 6: Copy project files ─────────────────────────────────────────────────
 WORKDIR /app
